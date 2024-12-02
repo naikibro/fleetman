@@ -1,0 +1,14 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: fleetman-webapp
+  namespace: fleetman
+spec:
+  selector:
+    app: fleetman-webapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
