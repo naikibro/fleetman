@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,10 +14,10 @@ spec:
         app: fleetman-queue
     spec:
       containers:
-      - name: fleetman-queue
-        image: supinfo4kube/queue:1.0.1
-        ports:
-        - containerPort: 61616
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: "production-microservice"
+        - name: fleetman-queue
+          image: supinfo4kube/queue:1.0.1
+          ports:
+            - containerPort: 61616
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "production-microservice"
