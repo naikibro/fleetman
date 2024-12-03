@@ -37,13 +37,19 @@ After a sucessful cluster creation or update, a `deployment_report.md` file shou
 
 ---
 
-## Testing the cluster resilience
+## 2 - Testing the cluster resilience
 
 please refer to this [testing guide](./docs/TESTING.md)
 
 ---
 
-## Cleanup
+## 3 - Deploy to cluster to Azure
+
+please refer to this [deployment guide](./docs/DEPLOY.md)
+
+---
+
+## 4 - Cleanup
 
 To remove all resources, delete the `fleetman` namespace:
 

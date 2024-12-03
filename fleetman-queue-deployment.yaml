@@ -21,3 +21,5 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "production-microservice"
+            - name: ACTIVEMQ_OPTS_MAXFRAMESIZE
+              value: "1101048576000" # 1GB frame size
