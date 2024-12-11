@@ -1,4 +1,3 @@
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,10 +14,10 @@ spec:
         app: fleetman-api-gateway
     spec:
       containers:
-      - name: fleetman-api-gateway
-        image: supinfo4kube/api-gateway:1.0.1
-        ports:
-        - containerPort: 8080
-        env:
-        - name: SPRING_PROFILES_ACTIVE
-          value: "production-microservice"
+        - name: fleetman-api-gateway
+          image: supinfo4kube/api-gateway:1.0.1
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "production-microservice"
