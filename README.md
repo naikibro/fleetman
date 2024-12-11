@@ -20,6 +20,10 @@ We recommend you install these prior to the cluster setup
 - unix based OS ( preferably )
 - bash
 
+## Deploy the cluster ( 1 master + 2 nodes )
+
+please refer to this [deployment guide](./docs/DEPLOY.md)
+
 ## 1 - Setup the cluster
 
 Run the convenience [setup script](./run-cluster.sh)  
