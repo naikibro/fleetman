@@ -21,3 +21,10 @@ spec:
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: "production-microservice"
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /data/db # Default MongoDB data directory
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongo-data

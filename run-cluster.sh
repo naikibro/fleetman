@@ -58,38 +58,39 @@ echo "| Resource | Status |" >> $REPORT_FILE
 echo "|----------|--------|" >> $REPORT_FILE
 
 echo "\n"
+echo "----- DEPLOYING STORAGE -----"
+echo "\n"
+# Apply storage YAML files
+for file in ./manifests/storage/*.yaml; do
+  echo "Deploying $file..."
+  apply_with_color "$file"
+done
+
+echo "\n"
 echo "----- DEPLOYING SERVICES -----"
 echo "\n"
-# Apply YAML files
-echo "Deploying Persistent Volume Claim..."
-apply_with_color fleetman-mongodb-pvc.yaml
+# Apply service YAML files
+for file in ./manifests/services/*.yaml; do
+  echo "Deploying $file..."
+  apply_with_color "$file"
+done
 
-echo "Deploying MongoDB..."
-apply_with_color fleetman-mongodb-deployment.yaml
-apply_with_color fleetman-mongodb-service.yaml
-
-echo "Deploying Position Simulator..."
-apply_with_color fleetman-position-simulator-deployment.yaml
-apply_with_color fleetman-position-simulator-service.yaml
-
-echo "Deploying Queue Service..."
-apply_with_color fleetman-queue-deployment.yaml
-apply_with_color fleetman-queue-service.yaml
-
-echo "Deploying API Gateway..."
-apply_with_color fleetman-api-gateway-deployment.yaml
-apply_with_color fleetman-api-gateway-service.yaml
-
-echo "Deploying Web Application..."
-apply_with_color fleetman-webapp-deployment.yaml
-apply_with_color fleetman-webapp-service.yaml
+echo "\n"
+echo "----- DEPLOYING DEPLOYMENTS -----"
+echo "\n"
+# Apply deployment YAML files
+for file in ./manifests/deployments/*.yaml; do
+  echo "Deploying $file..."
+  apply_with_color "$file"
+done
 
 # Verify deployments
 echo "\n"
 echo "----- DEPLOYMENT : HEALTHCHECK -----"
 echo "\n"
 echo "Waiting for all pods to become ready..."
-kubectl wait --for=condition=ready pod --all -n $NAMESPACE --timeout=300s
+kubectl wait --for=condition=available deployment -l app=fleetman-mongodb -n $NAMESPACE --timeout=300s
+kubectl wait --for=condition=available deployment -l app=fleetman-webapp -n $NAMESPACE --timeout=300s
 
 # Display and log status
 echo "\n"

@@ -74,6 +74,56 @@ kubectl logs -n fleetman -l app=fleetman-position-simulator
 
 ---
 
-## 4. Deploy cluster to Azure
+## 4. Check the Persistent Volume Claim bounding with Mongodb
 
+Verify PVC status
 
+```sh
+kubectl get pvc mongo-data -n fleetman
+kubectl describe pvc mongo-data -n fleetman
+
+```
+
+See that all mongo pods use the same pvc for persistent storage volume
+
+```sh
+kubectl describe pod -l app=fleetman-mongodb -n fleetman
+```
+
+### 4.1 - Test persistence
+
+Get the mongo pods names
+
+```sh
+kgp -n fleetman
+```
+
+Insert test data, replace `<mongo-pod-name>` with one of your mongo pod name
+
+```sh
+kubectl exec -it <mongo-pod-name> -n fleetman -- mongo
+```
+
+```sh
+use testdb
+db.testcollection.insert({name: "Fleetman", value: "Test"})
+db.testcollection.find()
+```
+
+**Delete the pod to simulate failure**
+
+```sh
+kubectl delete pod <mongo-pod-name> -n fleetman
+```
+
+**Verify data persitence**
+Connect to the new pod generated
+
+```sh
+kubectl exec -it <new-mongo-pod-name> -n fleetman -- mongo
+```
+
+```sh
+use testdb
+db.testcollection.find()
+```
