@@ -43,13 +43,7 @@ please refer to this [testing guide](./docs/TESTING.md)
 
 ---
 
-## 3 - Deploy to cluster to Azure
-
-please refer to this [deployment guide](./docs/DEPLOY.md)
-
----
-
-## 4 - Cleanup
+## 3 - Cleanup
 
 To remove all resources, delete the `fleetman` namespace:
 

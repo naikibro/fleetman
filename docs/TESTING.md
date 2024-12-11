@@ -75,3 +75,5 @@ kubectl logs -n fleetman -l app=fleetman-position-simulator
 ---
 
 ## 4. Deploy cluster to Azure
+
+
